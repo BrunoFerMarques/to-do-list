@@ -10,7 +10,6 @@ interface ModalCreateNoteProps {
   onCreateNoteSucess: (note: Note) => void;
 
 }
-
 const modalStyle = {
   position: 'absolute' ,
   top: '50%',
