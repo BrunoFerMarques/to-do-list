@@ -11,7 +11,7 @@ interface ModalUpdateNoteProps {
 }
 
 const modalStyle = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -41,7 +41,6 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
 
-  // Preenche os campos quando a nota muda
   useEffect(() => {
     if (note) {
       setTitle(note.Title);
@@ -58,7 +57,7 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
     const date = formatDate(now)
 
     const updatedNote: Note = {
-      id: note?.id || '', // mantém o mesmo ID!
+      id: note?.id || '', 
       Title: title,
       Text: text,
       created_at: date
