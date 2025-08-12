@@ -18,7 +18,7 @@ export default function Home() {
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [noteToUpdate, setNoteToUpdate] = useState<Note | null>(null);
 
-  // MUDANÇA 1: Buscar dados do Supabase na inicialização
+  //Buscar dados do Supabase na inicialização
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -53,12 +53,11 @@ export default function Home() {
     setIsModalUpdateOpen(false);
   }
 
-  // MUDANÇA 2: Função de criar nota agora é async e usa Supabase
   const handleSaveSuccess = async (noteData: Omit<Note, 'id' | 'Day'>) => {
     try {
       const { data: newNote, error } = await supabase
         .from('notes')
-        .insert({ Title: noteData.Title, Text: noteData.Text })
+        .insert({ title: noteData.title, text: noteData.text })
         .select()
         .single();
 
@@ -73,12 +72,11 @@ export default function Home() {
     }
   };
 
-  // MUDANÇA 3: Função de atualizar nota agora é async e usa Supabase
   const handleUpdateSucess = async (updatedNote: Note) => {
     try {
       const { data: returnedNote, error } = await supabase
         .from('notes')
-        .update({ Title: updatedNote.Title, Text: updatedNote.Text })
+        .update({ title: updatedNote.title, text: updatedNote.text })
         .eq('id', updatedNote.id)
         .select()
         .single();
@@ -93,6 +91,7 @@ export default function Home() {
         handleCloseModalUpdate();
       }
     } catch (error) {
+      console.log('entrou')
       alert('Erro ao atualizar a nota!');
       console.error(error);
     }
@@ -120,8 +119,8 @@ export default function Home() {
               <time className='text-gray-400'>{new Date(note.created_at).toLocaleDateString()}</time>
               <EditIcon onClick={() => handleOpenUpdateModal(note)} />
             </div>
-            <h1 className="border-b-2 border-blue-300 rounded-none text-white h-10 flex items-center">{note.Title}</h1>
-            <p className='text-white overflow-auto bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out h-full'>{note.Text}</p>
+            <h1 className="border-b-2 border-blue-300 rounded-none text-white h-10 flex items-center">{note.title}</h1>
+            <p className='text-white overflow-auto bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out h-full'>{note.text}</p>
           </div>
         ))}
       </div>

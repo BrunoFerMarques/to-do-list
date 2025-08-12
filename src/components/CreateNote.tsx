@@ -44,10 +44,11 @@ const CreateNote: React.FC<ModalCreateNoteProps> = ({ isOpen, onClose, onCreateN
     const date = formatDate(now)
     
     const newNote: Note = {
-      Title: title,
-      Text: text,
-      created_at: date,
       id: crypto.randomUUID(),
+      title: title,
+      text: text,
+      created_at: date,
+      user_id: crypto.randomUUID(),
     };
     if(title == ''|| text == ''){
       alert("texto vazio")

@@ -43,8 +43,8 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
 
   useEffect(() => {
     if (note) {
-      setTitle(note.Title);
-      setText(note.Text);
+      setTitle(note.title);
+      setText(note.text);
     }
   }, [note]);
 
@@ -58,9 +58,10 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
 
     const updatedNote: Note = {
       id: note?.id || '', 
-      Title: title,
-      Text: text,
-      created_at: date
+      title: title,
+      text: text,
+      created_at: date,
+      user_id: note?.user_id || ''
     };
 
     onUpdateNoteSucess(updatedNote)
