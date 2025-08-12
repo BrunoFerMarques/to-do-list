@@ -8,7 +8,6 @@ interface ModalCreateNoteProps {
   isOpen: boolean;
   onClose: () => void;
   onCreateNoteSucess: (note: Note) => void;
-
 }
 const modalStyle = {
   position: 'absolute' ,
@@ -62,7 +61,8 @@ const CreateNote: React.FC<ModalCreateNoteProps> = ({ isOpen, onClose, onCreateN
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box sx={modalStyle}>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <h1>Criar nota</h1>
           <button onClick={onClose} className="text-white hover:text-gray-300">
             <CloseIcon />
           </button>
@@ -78,7 +78,7 @@ const CreateNote: React.FC<ModalCreateNoteProps> = ({ isOpen, onClose, onCreateN
             <textarea 
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className='border-t-2 border-b-2 border-white text-white overflow-y-scroll bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out h-full'
+              className='border-t-2 border-b-2 border-white text-white overflow-y-scroll bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out whitespace-pre-wrap break-words h-full'
               placeholder='Digite seu texto aqui...'
             />
             <button 
@@ -87,7 +87,6 @@ const CreateNote: React.FC<ModalCreateNoteProps> = ({ isOpen, onClose, onCreateN
             >
               Salvar Nota
             </button>
-          
           </div>
         </form>
       </Box>

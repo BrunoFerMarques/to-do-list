@@ -70,12 +70,13 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box sx={modalStyle}>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <h1 className="text-white">Atualizar Nota</h1>
           <button onClick={onClose} className="text-white hover:text-gray-300">
             <CloseIcon />
           </button>
         </div>
-        <h1 className="text-white">Atualizar Nota</h1>
+        
         <div className="grid grid-rows-[auto_1fr] h-full p-4 gap-2">
           <input
             value={title}
@@ -86,7 +87,7 @@ const UpdateNote: React.FC<ModalUpdateNoteProps> = ({ isOpen, onClose, onUpdateN
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="border-t-2 border-b-2 border-white text-white overflow-y-scroll bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out h-full"
+            className="border-t-2 border-b-2 border-white text-white overflow-y-scroll bg-transparent focus:bg-gray-800 transition duration-200 ease-in-out whitespace-pre-wrap break-words h-full"
             placeholder="Digite seu texto aqui..."
           />
           <button
