@@ -36,9 +36,9 @@ export default function RootLayout({
         <div className="p-3">
           logo
         </div>
-        <div>
-            <Link href="/" className="p-5 m-3 bg-gray-700 hover:bg-black text-white transition duration-300 ease-in-out border-2 border-gray-700 hover:border-red-600">home</Link> 
-            <Link href="/customer_area" className="p-5 m-3 bg-gray-700 hover:bg-black text-white transition duration-300 ease-in-out border-2 border-gray-700 hover:border-red-600">area do cliente</Link> 
+        <div className="p-3">
+            <Link href="/" className="font-roboto p-5 m-2 bg-gray-500 hover:bg-gray-900 text-white transition duration-300 ease-in-out border-2 rounded-t-lg border-gray-700 hover:border-tahiti font-modal">HOME</Link> 
+            <Link href="/customer_area" className="font-roboto p-5 bg-gray-500 hover:bg-gray-900 text-white transition duration-300 ease-in-out border-2 rounded-t-lg border-gray-700 hover:border-tahiti font-modal">CONFIGURAÇÕES</Link> 
         </div>
       </header>
         {children}

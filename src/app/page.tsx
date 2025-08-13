@@ -4,10 +4,12 @@ import CreateNote from '@/components/CreateNote';
 import { Note } from "@/models/Note";
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import EditIcon from '@mui/icons-material/Edit';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import UpdateNote from '@/components/UpdateNote';
 import DeleteNote from '@/components/DeleteNote';
 import { supabase } from '@/lib/supabaseClient';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ShowNote from '@/components/ShowNote';
 
 const addIconStyle: React.CSSProperties = {
   width: 80
@@ -19,9 +21,10 @@ export default function Home() {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false)
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [isModalShowOpen, setIsModalShowOpen] = useState(false)
   const [noteToUpdate, setNoteToUpdate] = useState<Note | null>(null)
   const [noteToDelete, setNoteToDelete] = useState<Note | null> (null)
-
+  const [noteToShow, setNoteToShow] = useState<Note | null>(null)
   //Buscar dados do Supabase na inicialização
   useEffect(() => {
     const fetchNotes = async () => {
@@ -58,13 +61,23 @@ export default function Home() {
   }
   
   const handleOpenUpdateModal = (note: Note) => {
-    setNoteToUpdate(note);
-    setIsModalUpdateOpen(true);
+    setNoteToUpdate(note)
+    setIsModalUpdateOpen(true)
   }
   const handleCloseModalUpdate = () => {
-    setNoteToUpdate(null);
-    setIsModalUpdateOpen(false);
+    setNoteToUpdate(null)
+    setIsModalUpdateOpen(false)
   }
+
+  const handleOpenShowModal = (note: Note) => {
+    setNoteToShow(note)
+    setIsModalShowOpen(true)
+  }
+  const handleCloseShowModal = () => {
+    setNoteToShow(null)
+    setIsModalShowOpen(false)
+  }
+
 
   const handleSaveSuccess = async (noteData: Omit<Note, 'id' | 'Day'>) => {
     try {
@@ -127,11 +140,11 @@ export default function Home() {
   }
 
   return (
-    <div className="font-sans min-h-screen bg-gradient-to-r from-blue-900 to-tahiti p-4">
+    <div className="min-h-screen bg-gradient-to-r from-blue-900 to-tahiti p-4">
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
            <button
                 onClick={handleOpenCreateModal}
-                className='bg-black hover:bg-white hover:text-black rounded border-blue-300 border-2 text-white transition-colors w-full h-75 gap-3'
+                className='bg-black hover:bg-white hover:text-black rounded-lg border-blue-300 border-2 text-white text-xl font-cantarell transition-colors w-full h-full gap-3'
               >
                 <h1 className="border-blue-300 rounded-none">Crie uma nota clicando aqui</h1>
                 <ControlPointIcon sx={addIconStyle} />
@@ -142,10 +155,16 @@ export default function Home() {
               className="flex flex-col p-4 bg-gray-900 hover:bg-gray-800 transition duration-300 rounded-lg border border-blue-400 shadow-lg shadow-blue-500/20 text-white"
             >
               <div className='flex justify-between items-center mb-2'>
-              <time className='text-gray-400 text-sm'>
-                {new Date(note.created_at).toLocaleDateString()}
-              </time>
+                <time className='text-gray-400 text-sm'>
+                  {new Date(note.created_at).toLocaleDateString()}
+                </time>
                 <div className="flex gap-2">
+                  <button
+                  onClick={()=> handleOpenShowModal(note)}
+                  className='text-gray-300 hover:text-green-400 transition'
+                  >
+                    <OpenInFullIcon/>
+                  </button>
                   <button 
                     onClick={() => handleOpenUpdateModal(note)}
                     className="text-gray-300 hover:text-yellow-400 transition"
@@ -163,10 +182,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="space-y-3">
-                <h2 className="text-xl font-bold text-white border-b border-blue-400 pb-2">
+                <h2 className="text-xl font-NotoSerif text-white border-b border-blue-400 pb-2">
                   {note.title}
                 </h2>
-                <p className='text-gray-300 text-gray-300 whitespace-pre-wrap break-words overflow-hidden'>
+                <p className='font-cantarell text-gray-300 text-gray-300 whitespace-pre-wrap break-words overflow-hidden'>
                   {note.text}
                 </p>
               </div>
@@ -189,6 +208,11 @@ export default function Home() {
         onClose={handleCloseDeleteModal}
         onDeleteNoteSucess={handleDeleteSucess}
         note = {noteToDelete}
+      />
+      <ShowNote
+        isOpen ={isModalShowOpen}
+        onClose = {handleCloseShowModal}
+        note={noteToShow}
       />
     </div>
   );

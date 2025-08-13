@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -6,4 +9,7 @@
   --color-bermuda: #78dcca;
   --color-slategray: #C6E2FF;
   --color-gray: #1C1C1C;
+  --font-roboto: "Roboto", sans-serif;
+  --font-cantarell: "Cantarell", sans-serif;
+  --font-NotoSerif: "Noto Serif", sans-serif;
 }
