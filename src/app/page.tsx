@@ -25,6 +25,8 @@ export default function Home() {
   const [noteToUpdate, setNoteToUpdate] = useState<Note | null>(null)
   const [noteToDelete, setNoteToDelete] = useState<Note | null> (null)
   const [noteToShow, setNoteToShow] = useState<Note | null>(null)
+  const [user, setUser] = useState<any>(null);
+  const [isLogged, setIsLogged] = useState<boolean>(false)
   //Buscar dados do Supabase na inicialização
   useEffect(() => {
     const fetchNotes = async () => {
@@ -141,6 +143,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 to-tahiti p-4">
+      
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
            <button
                 onClick={handleOpenCreateModal}
@@ -191,6 +194,8 @@ export default function Home() {
               </div>
           </div>
           ))}
+      
+      
       </div>
       <CreateNote
         isOpen={isModalCreateOpen}
